@@ -1,0 +1,6 @@
+{
+  "name": "PlanPoseidon",
+  "description": "PlanPoseidon - Strategic Wealth Management & Corporate Advisory for Entrepreneurs, HNIs, and Businesses.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

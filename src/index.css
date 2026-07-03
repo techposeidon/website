@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  
+  --color-accent: #4D5324;
+  --color-bg-light: #F6F6F2;
+  --color-bg-dark: #191919;
+  --color-bg-card-dark: #222222;
+  --color-text-dark: #191919;
+  --color-text-light: #FFFFFF;
+  --color-border-light: #E5E5E5;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+  }
+}
+
+/* Custom continuous scrolling ticker animation */
+@keyframes continuousScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 1.25rem)); }
+}
+
+.ticker-track-animate {
+  animation: continuousScroll 45s linear infinite;
+}
+
+.ticker-track-animate:hover {
+  animation-play-state: paused;
+}
