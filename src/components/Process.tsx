@@ -3,12 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { PROCESS_STEPS } from '../data';
 import { Compass, FileCheck, CheckSquare, RefreshCw } from 'lucide-react';
+import { animate, stagger } from 'motion';
 
 export default function Process() {
   const [activeStep, setActiveStep] = useState(1);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const getStepIcon = (id: number) => {
     switch (id) {
@@ -32,6 +34,14 @@ export default function Process() {
       element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   };
+
+  useEffect(() => {
+    // Animate cards when component mounts
+    const cards = cardsRef.current.filter(el => el !== null);
+    if (cards.length > 0) {
+      animate(cards, { opacity: [0, 1], y: [30, 0] }, { duration: 0.6, delay: stagger(0.15) });
+    }
+  }, []);
 
   return (
     <section className="bg-[#F6F6F2] py-24 px-6 border-b border-[#E5E5E5]" id="approach">
@@ -87,11 +97,12 @@ export default function Process() {
 
           {/* Right Column - Cards Display Stack */}
           <div className="lg:col-span-7 space-y-8">
-            {PROCESS_STEPS.map((step) => (
+            {PROCESS_STEPS.map((step, index) => (
               <div
                 key={step.id}
+                ref={(el) => (cardsRef.current[index] = el)}
                 id={`process-card-${step.id}`}
-                className={`bg-white p-8 sm:p-12 rounded-2xl border transition-all duration-300 relative overflow-hidden ${
+                className={`bg-white p-8 sm:p-12 rounded-2xl border transition-all duration-300 relative overflow-hidden opacity-0 ${
                   activeStep === step.id
                     ? 'border-accent shadow-[0_10px_30px_rgba(77,83,36,0.04)] ring-1 ring-accent/10'
                     : 'border-neutral-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.01)]'
