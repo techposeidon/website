@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Menu, X, ArrowRight, Shield } from 'lucide-react';
 import { PageId } from '../types';
 // @ts-ignore
-import logoImg from '../assets/Logo.png';
+import logoImg from '../assets/Nev Logo.png';
 
 interface NavbarProps {
   currentPage: PageId;
@@ -45,7 +45,7 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
           className="flex items-center gap-3 text-left focus:outline-none group cursor-pointer"
           id="nav-logo"
         >
-          <div className="w-9 h-9 flex items-center justify-center overflow-hidden">
+          <div className="w-12 h-12 flex items-center justify-center overflow-hidden">
             <img
               src={logoImg}
               alt="PlanPoseidon Logo"
@@ -54,10 +54,10 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
             />
           </div>
           <div>
-            <span className="font-serif font-semibold text-xl tracking-tight block">
+            <span className={`font-serif font-semibold text-xl tracking-tight block ${isDarkPage ? 'text-white' : 'text-[#191919]'}`}>
               PlanPoseidon
             </span>
-            <span className="text-[10px] font-sans uppercase tracking-[0.15em] block text-accent font-medium">
+            <span className={`text-[10px] font-sans uppercase tracking-[0.15em] block font-medium ${isDarkPage ? 'text-white' : 'text-accent'}`}>
               Wealth Management
             </span>
           </div>
