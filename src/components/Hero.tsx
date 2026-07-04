@@ -87,7 +87,7 @@ export default function Hero({ onNavigate }: HeroProps) {
             onClick={() => onNavigate('contact')}
             className="w-full sm:w-auto bg-[#DFD7A5] text-[#2C3114] border-2 border-[#DFD7A5] hover:bg-transparent hover:text-[#DFD7A5] px-8 py-3.5 rounded-full text-xs font-bold tracking-[0.15em] flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg transition-all duration-300"
           >
-            Schedule Discrete Consultation <ArrowUpRight size={15} />
+            Schedule Consultation <ArrowUpRight size={15} />
           </button>
           
           <button
