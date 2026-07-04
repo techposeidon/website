@@ -11,6 +11,7 @@ import { animate, stagger } from 'motion';
 export default function Process() {
   const [activeStep, setActiveStep] = useState(1);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const getStepIcon = (id: number) => {
     switch (id) {
@@ -36,15 +37,35 @@ export default function Process() {
   };
 
   useEffect(() => {
-    // Animate cards when component mounts
-    const cards = cardsRef.current.filter(el => el !== null);
-    if (cards.length > 0) {
-      animate(cards, { opacity: [0, 1], y: [30, 0] }, { duration: 0.6, delay: stagger(0.15) });
+    // Animate cards when section comes into view
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const cards = cardsRef.current.filter(el => el !== null);
+            if (cards.length > 0) {
+              animate(cards, { opacity: [0, 1], y: [50, 0], scale: [0.95, 1] }, { duration: 0.6, delay: stagger(0.2) });
+            }
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
   }, []);
 
   return (
-    <section className="bg-[#F6F6F2] py-24 px-6 border-b border-[#E5E5E5]" id="approach">
+    <section ref={sectionRef} className="bg-[#F6F6F2] py-24 px-6 border-b border-[#E5E5E5]" id="approach">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
